@@ -41,7 +41,7 @@ El módulo físico de Kyma se compone de:
 
 #### Conexiones
 
-![]('/docs/pinout.png')
+![](https://diyi0t.com/wp-content/uploads/2020/07/INA219-ESP8266-WeMos-D1-Mini_Steckplatine.png)
 
 
 ### Demo
