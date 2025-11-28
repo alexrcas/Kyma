@@ -41,6 +41,8 @@ El módulo físico de Kyma se compone de:
 
 #### Conexiones
 
+Este es el dispositivo de medición. En el módulo de la derecha, en su parte superior pueden observarse dos entradas Vin- y Vin+. Esas conexiones serían las pinzas del multímetro, que se engancharán al circuito que se desee medir (siempre en serie)
+
 ![](https://diyi0t.com/wp-content/uploads/2020/07/INA219-ESP8266-WeMos-D1-Mini_Steckplatine.png)
 
 
