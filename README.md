@@ -41,6 +41,7 @@ El módulo físico de Kyma se compone de:
 
 #### Conexiones
 
+![]('/docs/pinout.png')
 
 
 ### Demo
