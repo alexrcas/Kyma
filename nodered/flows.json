@@ -1,0 +1,145 @@
+[
+    {
+        "id": "b6ae62ca8c20eb53",
+        "type": "tab",
+        "label": "Flujo 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c8cd7b29a9f73148",
+        "type": "mqtt-broker",
+        "name": "Mosquitto",
+        "broker": "mosquitto",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "786a4161e1212556",
+        "type": "websocket-listener",
+        "path": "/ws",
+        "wholemsg": "false"
+    },
+    {
+        "id": "d6bf3c545469ca40",
+        "type": "mqtt in",
+        "z": "b6ae62ca8c20eb53",
+        "name": "",
+        "topic": "/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c8cd7b29a9f73148",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 400,
+        "wires": [
+            [
+                "29f4bf9ad823bb12",
+                "fb8bb9e78162ab0b"
+            ]
+        ]
+    },
+    {
+        "id": "2facf0ffe5b9fede",
+        "type": "http in",
+        "z": "b6ae62ca8c20eb53",
+        "name": "",
+        "url": "/dashboard",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 240,
+        "y": 480,
+        "wires": [
+            [
+                "0e8447b99982badd"
+            ]
+        ]
+    },
+    {
+        "id": "0e8447b99982badd",
+        "type": "file in",
+        "z": "b6ae62ca8c20eb53",
+        "name": "",
+        "filename": "/data/dashboard.html",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 480,
+        "y": 480,
+        "wires": [
+            [
+                "004ef38d6ee169cb"
+            ]
+        ]
+    },
+    {
+        "id": "004ef38d6ee169cb",
+        "type": "http response",
+        "z": "b6ae62ca8c20eb53",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "fb8bb9e78162ab0b",
+        "type": "websocket out",
+        "z": "b6ae62ca8c20eb53",
+        "name": "",
+        "server": "786a4161e1212556",
+        "client": "",
+        "x": 440,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "29f4bf9ad823bb12",
+        "type": "debug",
+        "z": "b6ae62ca8c20eb53",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 340,
+        "wires": []
+    }
+]

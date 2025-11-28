@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background:
+                linear-gradient(rgb(2, 31, 45), rgba(0, 0, 0, 0.9)),
+                url('grid.png');
+
+            background-attachment: fixed;
+            /* El fondo ya no se acaba */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #e0f7ff;
+            /* Opcional, combina bien con estética sci-fi */
+        }
+
+        .card {
+            background: rgba(0, 149, 255, 0.019);
+            /* Fondo azulado transparente */
+            backdrop-filter: blur(1px);
+            /* Efecto glass/sci-fi */
+            border: 1px solid rgba(0, 200, 255, 0.25);
+            border-radius: 0;
+            box-shadow: 0 0 18px rgba(0, 200, 255, 0.05);
+            color: #e0f7ff;
+            /* Texto ligeramente azulado */
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        /* Títulos */
+        .card-title {
+            letter-spacing: 1.2px;
+            font-weight: 600;
+        }
+
+        /* Texto */
+        .card-text {
+            color: #cfefff;
+        }
+
+        .color {
+            color: #e617d58e
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container mt-4 pt-4">
+
+        <div class="row">
+
+            <div class="col-6">
+                <div class="d-flex flex-column">
+
+                    <div class="div1 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">V</h5>
+                                <div class="row pt-2 px-2" style="height: 25vh;">
+                                    <canvas id="vChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="div1 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">mA</h5>
+                                <div class="row pt-2 px-2" style="height: 25vh;">
+                                    <canvas id="mAChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="div1 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">mW</h5>
+                                <div class="row pt-2 px-2" style="height: 25vh;">
+                                    <canvas id="mWChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="col-6">
+                <div class="d-flex flex-column">
+
+                    <div class="div1 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">V</h5>
+                                <div class="row pt-2 px-2" style="height: 25vh;">
+                                    <canvas id="vChartAcc"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="div1 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">mA</h5>
+                                <div class="row pt-2 px-2" style="height: 25vh;">
+                                    <canvas id="mAChartAcc"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="div1 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">mW</h5>
+                                <div class="row pt-2 px-2" style="height: 25vh;">
+                                    <canvas id="mWChartAcc"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+
+    <script>
+
+        const options = {
+            plugins: {
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'x',
+                    },
+                    zoom: {
+                        wheel: {
+                            enabled: true,
+                        },
+                        pinch: {
+                            enabled: true
+                        },
+                        mode: 'x',
+                    }
+                },
+                legend: {
+                    display: false
+                }
+            },
+            maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: true, min: 0, max: 10, ticks: { stepSize: 0.1 } },
+                x: {
+                    ticks: {
+                        display: false
+                    }
+                }
+            }
+        }
+
+                const mWOptions = {
+            plugins: {
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'x',
+                    },
+                    zoom: {
+                        wheel: {
+                            enabled: true,
+                        },
+                        pinch: {
+                            enabled: true
+                        },
+                        mode: 'x',
+                    }
+                },
+                legend: {
+                    display: false
+                }
+            },
+            maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: true, min: 0, max: 25},
+                x: {
+                    ticks: {
+                        display: false
+                    }
+                }
+            }
+        }
+
+
+        const newChartData = color => {
+            return {
+                labels: [],
+                datasets: [
+                    {
+                        data: [],
+                        borderWidth: 0.8,
+                        pointRadius: 0,
+                        borderColor: color
+                    }
+                ]
+            }
+        }
+
+        
+        const vChart = new Chart(document.getElementById('vChart'), {
+            type: 'line',
+            data: newChartData('#40bae47d'),
+            options
+        });
+
+
+        const vChartAcc = new Chart(document.getElementById('vChartAcc'), {
+            type: 'line',
+            data: newChartData('#40bae47d'),
+            options
+        });
+
+
+        const mAChart = new Chart(document.getElementById('mAChart'), {
+            type: 'line',
+            data: newChartData('#32cb178e'),
+            options
+        });
+
+
+        const mAChartAcc = new Chart(document.getElementById('mAChartAcc'), {
+            type: 'line',
+            data: newChartData('#32cb178e'),
+            options
+        });
+
+
+        const mWChart = new Chart(document.getElementById('mWChart'), {
+            type: 'line',
+            data: newChartData('#e617d58e'),
+            options: mWOptions
+        });
+
+
+        const mWChartAcc = new Chart(document.getElementById('mWChartAcc'), {
+            type: 'line',
+            data: newChartData('#e617d58e'),
+            options: mWOptions
+        });
+
+
+        const addData = (chart, x, y, accumulate = false) => {
+
+            chart.data.labels.push(x);
+            chart.data.datasets[0].data.push(y);
+            chart.update();
+
+            if (!accumulate) {
+                return;
+            }
+
+            if (chart.data.labels.length > 50) {
+                chart.data.labels.shift();
+                chart.data.datasets[0].data.shift();
+                chart.update();
+            }
+        }
+
+        const socket = new WebSocket(`ws://${location.host}/ws`);
+
+
+        socket.onmessage = function ({ data }) {
+            const json = JSON.parse(data);
+
+            addData(vChart, json.timestamp, json.v);
+            addData(vChartAcc, json.timestamp, json.v, true);
+
+            addData(mAChart, json.timestamp, json.mA);
+            addData(mAChartAcc, json.timestamp, json.mA, true);
+
+            addData(mWChart, json.timestamp, json.mW);
+            addData(mWChartAcc, json.timestamp, json.mW, true);
+        };
+
+
+    </script>
+
+
+</body>
+
+</html>

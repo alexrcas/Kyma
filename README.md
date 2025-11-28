@@ -39,4 +39,33 @@ El módulo físico de Kyma se compone de:
 * Sensor de tensión INA219
 * Wemos D1 Mini como microcontrolador. Encargado de recoger los datos del sensor y transmitirlos vía MQTT
 
+#### Conexiones
+
+
+
 ### Demo
+
+Se diseña un pequeño circuito aparte que hace fade-in y fade-out de un led, al cual se engancha el dispositivo creado. Se puede observar como el dispositivo comienza a emitir y enviar datos al panel, que dibuja la gráfica previsible.
+
+En el lado izquierdo del panel quedan los datos acumulados, mientras que en el derecho se visualiza solo una ventana temporal.
+
+![](/docs/video.gif)
+
+
+### Ejecución
+
+En la raíz del proyecto ejecutar:
+
+```bash
+docker compose up -d
+```
+
+Esto creará y desplegará los contenedores ya configurados.
+* Node-RED será accesible en el navegador en `http://localhost:1800`
+* El panel web estará en `http://localhost:1800/dashboard`
+* Mosquitto se ejecuta en `localhost:1883`
+
+#### Observaciones
+
+1. Nótese que los contenedores están conectados entre sí mediante la red interna de docker, por lo que para conectar a Mosquitto desde Node-RED la dirección a especificar no es localhost:1883 sino mosquitto:1883
+2. El HTML del panel web se encuentra en `/nodered/dashboard.html`. Docker-compose mapea este directorio a `/data` en el contenedor.
