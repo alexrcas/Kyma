@@ -1,15 +1,11 @@
 # Kyma
 
-Kyma es un multímetro digital que registra, almacena y analiza datos en tiempo real, ofreciendo una visualización interactiva y accesible desde un panel web.
-
-### Descripción del proyecto
+Kyma es un dispositivo que se conecta en serie a un circuito y permite registrar en tiempo real y conserver un histórico del voltaje, corriente y potencia.
 
 Un multímetro permite medir valores como el voltaje o el consumo de un circuito en un momento puntual. Sin embargo, en muchos casos resulta útil disponer de una traza continua de esos valores, como en la imagen de ejemplo. Esto facilita analizar el comportamiento del sistema con más detalle y detectar picos de consumo asociados a determinadas operaciones.
 
 ![](/docs/signal.png)
 
-
-Kyma es un módulo que se conecta en serie a un circuito y permite registrar en tiempo real y conservar la traza del voltaje, la corriente y la potencia usada por el mismo.
 
 ### Arquitectura
 
@@ -48,7 +44,7 @@ Este es el dispositivo de medición. En el módulo de la derecha, en su parte su
 
 ### Demo
 
-Se diseña un pequeño circuito aparte que hace fade-in y fade-out de un led, al cual se engancha el dispositivo creado. Se puede observar como el dispositivo comienza a emitir y enviar datos al panel, que dibuja la gráfica previsible.
+Se crea un pequeño circuito que hace fade-in y fade-out de un led, al cual se engancha el dispositivo creado. Se puede observar como el dispositivo comienza a emitir y enviar datos al panel, que dibuja la gráfica previsible.
 
 En el lado izquierdo del panel quedan los datos acumulados, mientras que en el derecho se visualiza solo una ventana temporal.
 
