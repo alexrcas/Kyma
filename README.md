@@ -1,10 +1,14 @@
 # Kyma
 
-Kyma es un dispositivo que se conecta en serie a un circuito y permite registrar en tiempo real y conserver un histórico del voltaje, corriente y potencia.
+Kyma es un dispositivo que se conecta en serie a un circuito y permite registrar en tiempo real y conservar un histórico del voltaje, corriente y potencia.
 
 Un multímetro permite medir valores como el voltaje o el consumo de un circuito en un momento puntual. Sin embargo, en muchos casos resulta útil disponer de una traza continua de esos valores, como en la imagen de ejemplo. Esto facilita analizar el comportamiento del sistema con más detalle y detectar picos de consumo asociados a determinadas operaciones.
 
 ![](/docs/signal.png)
+
+### Demo
+
+![](/docs/video.gif)
 
 
 ### Arquitectura
@@ -40,15 +44,6 @@ El módulo físico de Kyma se compone de:
 Este es el dispositivo de medición. En el módulo de la derecha, en su parte superior pueden observarse dos entradas Vin- y Vin+. Esas conexiones serían las pinzas del multímetro, que se engancharán al circuito que se desee medir (siempre en serie)
 
 ![](https://diyi0t.com/wp-content/uploads/2020/07/INA219-ESP8266-WeMos-D1-Mini_Steckplatine.png)
-
-
-### Demo
-
-Se crea un pequeño circuito que hace fade-in y fade-out de un led, al cual se engancha el dispositivo creado. Se puede observar como el dispositivo comienza a emitir y enviar datos al panel, que dibuja la gráfica previsible.
-
-En el lado izquierdo del panel quedan los datos acumulados, mientras que en el derecho se visualiza solo una ventana temporal.
-
-![](/docs/video.gif)
 
 
 ### Ejecución
